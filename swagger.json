@@ -1,0 +1,255 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "My First CRUD API",
+    "description": "This is my first CRUD Api. Tools and Framwork => (Express.js, ORM, mySQL)"
+  },
+  "host": "localhost:8080",
+  "basePath": "/api/users",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "API for users in the system"
+    }
+  ],
+  "paths": {
+    "/create/{db}": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Create new user in system",
+        "description": "Create new user in system",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          {
+            "in": "path",
+            "name": "db",
+            "description": "Database type",
+            "type": "string",
+            "enum": ["sql", "no-sql"],
+            "required": true
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "New user is created",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    },
+    "/findall/{db}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "db",
+          "description": "Database type",
+          "type": "string",
+          "enum": ["sql", "no-sql"],
+          "required": true
+        }
+      ],
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get all users in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/All"
+            }
+          }
+        }
+      }
+    },
+    "/find/{id}/{db}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of user that we want to find",
+          "oneOf": [{ "type": "integer" }, { "type": "string" }]
+        },
+        {
+          "in": "path",
+          "name": "db",
+          "description": "Database type",
+          "type": "string",
+          "enum": ["sql", "no-sql"],
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Find user with give ID",
+        "tags": ["Users"],
+        "responses": {
+          "200": {
+            "description": "User is find.",
+            "schema": {
+              "$ref": "#/definitions/FindUser"
+            }
+          }
+        }
+      }
+    },
+    "/update/{id}/{db}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of user that we want to find",
+          "oneOf": [{ "type": "integer" }, { "type": "string" }]
+        },
+        {
+          "in": "path",
+          "name": "db",
+          "description": "Database type",
+          "type": "string",
+          "enum": ["sql", "no-sql"],
+          "required": true
+        }
+      ],
+      "put": {
+        "summary": "Update user with give ID",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/UpdateUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User is updated",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    },
+    "/delete/{id}/{db}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of user that we want to find",
+          "oneOf": [{ "type": "integer" }, { "type": "string" }]
+        },
+        {
+          "in": "path",
+          "name": "db",
+          "description": "Database type",
+          "type": "string",
+          "enum": ["sql", "no-sql"],
+          "required": true
+        }
+      ],
+      "delete": {
+        "summary": "Delete user with give ID",
+        "tags": ["Users"],
+        "responses": {
+          "200": {
+            "description": "User is deleted",
+            "schema": {
+              "$ref": "#/definitions/FindUser"
+            }
+          }
+        }
+      }
+    },
+    "/deleteall/{db}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "db",
+          "description": "Database type",
+          "type": "string",
+          "enum": ["sql", "no-sql"],
+          "required": true
+        }
+      ],
+      "delete": {
+        "summary": "Delete all user",
+        "tags": ["Users"],
+        "responses": {
+          "200": {
+            "description": "Users is deleted",
+            "schema": {
+              "$ref": "#/definitions/All"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "required": ["fullName", "city"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "age": {
+          "type": "number"
+        }
+      }
+    },
+    "UpdateUser": {
+      "required": ["fullName", "city"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "age": {
+          "type": "number"
+        }
+      }
+    },
+    "FindUser": {
+      "required": ["id", "db"],
+      "properties": {
+        "id": {
+          "type": ["integer", "string"]
+        },
+        "db": {
+          "type": "string"
+        }
+      }
+    },
+    "All": {
+      "required": ["db"],
+      "properties": {
+        "db": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"]
+}
