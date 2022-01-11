@@ -1,5 +1,5 @@
-const mySQL = require("../models");
-const mongo = require("../models/mongo");
+const mySQL = require("../models").mysqlDB;
+const mongo = require("../models").mongoDB;
 const User = mySQL.users;
 const MongoUser = mongo.users;
 const Op = mySQL.Sequelize.Op;

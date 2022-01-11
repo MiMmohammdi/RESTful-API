@@ -1,14 +1,21 @@
 module.exports = {
+  // MySQL Configuration
   HOST: "localhost",
   USER: "root",
   PASSWORD: "",
   DATABASE: "crud_api",
+
+  // Database type
   dialect: "mysql",
+
+  // Pooling configuration for better connection
   pool: {
     max: 5,
     min: 0,
     acquire: 30000,
     idle: 10000,
   },
-  URL: "mongodb://localhost:27017/crud_api"
+
+  // MongoDB Configuration
+  URL: "mongodb://localhost:27017/crud_api",
 };
