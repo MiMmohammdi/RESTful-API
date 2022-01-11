@@ -3,7 +3,8 @@ module.exports = {
   HOST: "localhost",
   USER: "root",
   PASSWORD: "",
-  DATABASE: "crud_api",
+  DATABASE: "CRUD",
+  PORT: "3306",
 
   // Database type
   dialect: "mysql",
@@ -17,5 +18,5 @@ module.exports = {
   },
 
   // MongoDB Configuration
-  URL: "mongodb://localhost:27017/crud_api",
+  URL: "mongodb://localhost:27017/CRUD",
 };

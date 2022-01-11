@@ -13,11 +13,16 @@ const app = express();
 
 // Routers
 const router = require("./router/index");
+console.log("router :>> ", router);
 
-// mySQL Connection
-db.sequelize.sync({ force: true }).then(() => {
-  console.log("Drop and re-sync db.");
-});
+try {
+  // mySQL Connection
+  db.sequelize.sync({ force: true }).then(() => {
+    console.log("Drop and re-sync Database.");
+  });
+} catch (error) {
+  console.log("Dont drop and re-sync Database.");
+}
 
 // MongoDB Connection
 mongodb.mongoose
@@ -36,8 +41,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Start use Swagger for Documention
 app.use("/api-doc", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// Main Route and Setup another routers
-app.use("/api/users", router);
+// Main Route and Setup another routers for mySQL database
+app.use("/api/1.0/users/sql", router.mysqlRouter);
+
+// Main Route and Setup another routers for MongoDB database
+app.use("/api/1.0/users/nosql", router.mongodbRouter);
 
 // Root address
 app.get("/", (req, res) => {
@@ -48,5 +56,5 @@ app.get("/", (req, res) => {
 
 // Listening on 8080 port LocalHost
 app.listen(8080, () => {
-  console.log(`Server is running on port 8080.`);
+  console.log(`Server is running on http://localhost:8080`);
 });

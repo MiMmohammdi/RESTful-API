@@ -34,12 +34,5 @@ sequelize
     console.error("Unable to connect to the database:", err);
   });
 
-// const db = {};
-
-// db.Sequelize = Sequelize;
-// db.sequelize = sequelize;
-
-// db.users = require("./users")(sequelize, Sequelize);
-
 // Package the necessary tools to communicate with the database and export
 module.exports = { Sequelize, sequelize, users: user(sequelize, Sequelize) };

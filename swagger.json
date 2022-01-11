@@ -3,18 +3,18 @@
   "info": {
     "version": "1.0.0",
     "title": "My First CRUD API",
-    "description": "This is my first CRUD Api. Tools and Framwork => (Express.js, ORM, mySQL)"
+    "description": "RESTful APIs for CRUD operations in two databases, mySQL and MongoDB"
   },
   "host": "localhost:8080",
-  "basePath": "/api/users",
+  "basePath": "/api/1.0/users/",
   "tags": [
     {
       "name": "Users",
-      "description": "API for users in the system"
+      "description": "APIs for users in the system"
     }
   ],
   "paths": {
-    "/create/{db}": {
+    "/{db}/create": {
       "post": {
         "tags": ["Users"],
         "summary": "Create new user in system",
@@ -33,14 +33,14 @@
             "name": "db",
             "description": "Database type",
             "type": "string",
-            "enum": ["sql", "no-sql"],
+            "enum": ["sql", "nosql"],
             "required": true
           }
         ],
         "produces": ["application/json"],
         "responses": {
-          "200": {
-            "description": "New user is created",
+          "201": {
+            "description": "New user created.",
             "schema": {
               "$ref": "#/definitions/User"
             }
@@ -48,14 +48,14 @@
         }
       }
     },
-    "/findall/{db}": {
+    "/{db}/findall": {
       "parameters": [
         {
           "in": "path",
           "name": "db",
           "description": "Database type",
           "type": "string",
-          "enum": ["sql", "no-sql"],
+          "enum": ["sql", "nosql"],
           "required": true
         }
       ],
@@ -63,8 +63,8 @@
         "tags": ["Users"],
         "summary": "Get all users in system",
         "responses": {
-          "200": {
-            "description": "OK",
+          "202": {
+            "description": "User list received successfully.OK",
             "schema": {
               "$ref": "#/definitions/All"
             }
@@ -72,21 +72,21 @@
         }
       }
     },
-    "/find/{id}/{db}": {
+    "/{db}/find/{id}": {
       "parameters": [
         {
           "name": "id",
           "in": "path",
           "required": true,
           "description": "ID of user that we want to find",
-          "oneOf": [{ "type": "integer" }, { "type": "string" }]
+          "type": "string"
         },
         {
           "in": "path",
           "name": "db",
           "description": "Database type",
           "type": "string",
-          "enum": ["sql", "no-sql"],
+          "enum": ["sql", "nosql"],
           "required": true
         }
       ],
@@ -94,7 +94,7 @@
         "summary": "Find user with give ID",
         "tags": ["Users"],
         "responses": {
-          "200": {
+          "202": {
             "description": "User is find.",
             "schema": {
               "$ref": "#/definitions/FindUser"
@@ -103,21 +103,21 @@
         }
       }
     },
-    "/update/{id}/{db}": {
+    "/{db}/update/{id}": {
       "parameters": [
         {
           "name": "id",
           "in": "path",
           "required": true,
           "description": "ID of user that we want to find",
-          "oneOf": [{ "type": "integer" }, { "type": "string" }]
+          "type": "string"
         },
         {
           "in": "path",
           "name": "db",
           "description": "Database type",
           "type": "string",
-          "enum": ["sql", "no-sql"],
+          "enum": ["sql", "nosql"],
           "required": true
         }
       ],
@@ -136,7 +136,7 @@
         ],
         "responses": {
           "200": {
-            "description": "User is updated",
+            "description": "User was updated successfully.",
             "schema": {
               "$ref": "#/definitions/User"
             }
@@ -144,21 +144,21 @@
         }
       }
     },
-    "/delete/{id}/{db}": {
+    "/{db}/delete/{id}": {
       "parameters": [
         {
           "name": "id",
           "in": "path",
           "required": true,
           "description": "ID of user that we want to find",
-          "oneOf": [{ "type": "integer" }, { "type": "string" }]
+          "type": "string"
         },
         {
           "in": "path",
           "name": "db",
           "description": "Database type",
           "type": "string",
-          "enum": ["sql", "no-sql"],
+          "enum": ["sql", "nosql"],
           "required": true
         }
       ],
@@ -167,7 +167,7 @@
         "tags": ["Users"],
         "responses": {
           "200": {
-            "description": "User is deleted",
+            "description": "User was deleted successfully.",
             "schema": {
               "$ref": "#/definitions/FindUser"
             }
@@ -175,14 +175,14 @@
         }
       }
     },
-    "/deleteall/{db}": {
+    "/{db}/deleteall": {
       "parameters": [
         {
           "in": "path",
           "name": "db",
           "description": "Database type",
           "type": "string",
-          "enum": ["sql", "no-sql"],
+          "enum": ["sql", "nosql"],
           "required": true
         }
       ],
@@ -191,7 +191,7 @@
         "tags": ["Users"],
         "responses": {
           "200": {
-            "description": "Users is deleted",
+            "description": "Users is deleted.",
             "schema": {
               "$ref": "#/definitions/All"
             }
@@ -233,7 +233,7 @@
       "required": ["id", "db"],
       "properties": {
         "id": {
-          "type": ["integer", "string"]
+          "type": "string"
         },
         "db": {
           "type": "string"
