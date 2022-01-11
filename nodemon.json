@@ -1,0 +1,5 @@
+{
+  "watch": ["app", "server.js"],
+  "ext": "js",
+  "exec": "set NODE_ENV=development&& node server.js"
+}

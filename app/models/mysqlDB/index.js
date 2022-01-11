@@ -1,5 +1,5 @@
 // Database config
-const dbConfig = require("../../config/db.config.js");
+const dbConfig = require("../../config");
 // Sequlize ORM
 const Sequelize = require("sequelize");
 // User model
