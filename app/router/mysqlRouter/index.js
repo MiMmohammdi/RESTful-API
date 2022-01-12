@@ -1,8 +1,19 @@
 // Controllers
+const { mongodbTokenController } = require("../../controllers");
 const users = require("../../controllers").mysqlController;
+
+// Auth middleware
+const authChecker = require("../../middlewares/authChecker");
 
 // Express Router
 const router = require("express").Router();
+
+// router.use(authChecker)
+
+
+// for login and get jwt token
+// router.post("/token", mongodbTokenController);
+
 
 // Create new user
 router.post("/create", users.create);

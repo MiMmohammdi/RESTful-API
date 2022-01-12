@@ -6,7 +6,7 @@
     "description": "RESTful APIs for CRUD operations in two databases, mySQL and MongoDB"
   },
   "host": "localhost:8080",
-  "basePath": "/api/1.0/users/",
+  "basePath": "/api/v1/users/",
   "tags": [
     {
       "name": "Users",
