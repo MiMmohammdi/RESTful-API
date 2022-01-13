@@ -1,5 +1,5 @@
 // Database config
-const dbConfig = require("../../config/db.config.js");
+const dbConfig = require("../../config");
 // Sequlize ORM
 const Sequelize = require("sequelize");
 // User model
@@ -33,13 +33,6 @@ sequelize
   .catch((err) => {
     console.error("Unable to connect to the database:", err);
   });
-
-// const db = {};
-
-// db.Sequelize = Sequelize;
-// db.sequelize = sequelize;
-
-// db.users = require("./users")(sequelize, Sequelize);
 
 // Package the necessary tools to communicate with the database and export
 module.exports = { Sequelize, sequelize, users: user(sequelize, Sequelize) };
