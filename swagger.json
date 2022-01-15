@@ -1,20 +1,24 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "title": "My First CRUD API",
     "description": "RESTful APIs for CRUD operations in two databases, mySQL and MongoDB"
   },
-  "host": "localhost:8080",
-  "basePath": "/api/v1/users/",
+  "host": "localhost:8081",
+  "basePath": "/api/v1/",
   "tags": [
     {
+      "name": "Register",
+      "description": "Register and get Auth token"
+    },
+    {
       "name": "Users",
-      "description": "APIs for users in the system"
+      "description": "CRUD opration foor users"
     }
   ],
   "paths": {
-    "/{db}/create": {
+    "/{db}/users/create": {
       "post": {
         "tags": ["Users"],
         "summary": "Create new user in system",
@@ -24,6 +28,14 @@
             "name": "user",
             "in": "body",
             "description": "User that we want to create",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "User Auth token",
             "schema": {
               "$ref": "#/definitions/User"
             }
@@ -48,8 +60,16 @@
         }
       }
     },
-    "/{db}/findall": {
+    "/{db}/users/find_all": {
       "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "description": "User authorization token",
+          "schema": {
+            "$ref": "#/definitions/User"
+          }
+        },
         {
           "in": "path",
           "name": "db",
@@ -72,8 +92,16 @@
         }
       }
     },
-    "/{db}/find/{id}": {
+    "/{db}/users/find/{id}": {
       "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "description": "User authorization token",
+          "schema": {
+            "$ref": "#/definitions/User"
+          }
+        },
         {
           "name": "id",
           "in": "path",
@@ -103,8 +131,16 @@
         }
       }
     },
-    "/{db}/update/{id}": {
+    "/{db}/users/update/{id}": {
       "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "description": "User authorization token",
+          "schema": {
+            "$ref": "#/definitions/User"
+          }
+        },
         {
           "name": "id",
           "in": "path",
@@ -144,8 +180,16 @@
         }
       }
     },
-    "/{db}/delete/{id}": {
+    "/{db}/users/delete/{id}": {
       "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "description": "User authorization token",
+          "schema": {
+            "$ref": "#/definitions/User"
+          }
+        },
         {
           "name": "id",
           "in": "path",
@@ -175,8 +219,16 @@
         }
       }
     },
-    "/{db}/deleteall": {
+    "/{db}/users/delete_all": {
       "parameters": [
+        {
+          "name": "authorization",
+          "in": "header",
+          "description": "User authorization token",
+          "schema": {
+            "$ref": "#/definitions/User"
+          }
+        },
         {
           "in": "path",
           "name": "db",
@@ -198,16 +250,95 @@
           }
         }
       }
+    },
+    "/{db}/register/sign_up": {
+      "post": {
+        "tags": ["Register"],
+        "summary": "If user not exist create new user",
+        "description": "If user not exist create new user",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "If user not exist create new user",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          {
+            "in": "path",
+            "name": "db",
+            "description": "Database type",
+            "type": "string",
+            "enum": ["sql", "nosql"],
+            "required": true
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "Register",
+            "schema": {
+              "$ref": "#/definitions/SignUp"
+            }
+          }
+        }
+      }
+    },
+    "/{db}/register/sign_in": {
+      "post": {
+        "tags": ["Register"],
+        "summary": "Authenticate user",
+        "description": "Authenticate user",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "SignIn user",
+            "schema": {
+              "$ref": "#/definitions/SignIn"
+            }
+          },
+          {
+            "in": "path",
+            "name": "db",
+            "description": "Database type",
+            "type": "string",
+            "enum": ["sql", "nosql"],
+            "required": true
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "description": "User authorization token",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "201": {
+            "description": "New user signIn.",
+            "schema": {
+              "$ref": "#/definitions/SignIn"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
     "User": {
-      "required": ["fullName", "city"],
+      "required": ["username", "password", "name"],
       "properties": {
-        "name": {
+        "username": {
           "type": "string"
         },
-        "city": {
+        "password": {
+          "type": "string"
+        },
+        "name": {
           "type": "string"
         },
         "age": {
@@ -216,12 +347,15 @@
       }
     },
     "UpdateUser": {
-      "required": ["fullName", "city"],
+      "required": ["username", "password", "name"],
       "properties": {
-        "name": {
+        "username": {
           "type": "string"
         },
-        "city": {
+        "password": {
+          "type": "string"
+        },
+        "name": {
           "type": "string"
         },
         "age": {
@@ -244,6 +378,34 @@
       "required": ["db"],
       "properties": {
         "db": {
+          "type": "string"
+        }
+      }
+    },
+    "SignUp": {
+      "required": ["username", "password"],
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "age": {
+          "type": "number"
+        }
+      }
+    },
+    "SignIn": {
+      "required": ["username", "password"],
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
           "type": "string"
         }
       }

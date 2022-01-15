@@ -1,4 +1,11 @@
-const mysqlRouter = require("./mysqlRouter");
-const mongodbRouter = require("./mongodbRouter");
+const mongodbRegisterRouter = require("./mongodbRouter/register");
+const mysqlRegisterRouter = require("./mysqlRouter/register");
+const mongodbUsersRouter = require("./mongodbRouter/users");
+const mysqlUsersRouter = require("./mysqlRouter/users");
 
-module.exports = { mysqlRouter, mongodbRouter };
+module.exports = {
+  mongodbRegisterRouter,
+  mysqlRegisterRouter,
+  mysqlUsersRouter,
+  mongodbUsersRouter,
+};

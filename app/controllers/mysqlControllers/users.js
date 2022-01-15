@@ -1,5 +1,7 @@
-const mongo = require("../../models").mongoDB;
-const MongoUser = mongo.users;
+const { mysqlDB } = require("../../models");
+const User = mysqlDB.users;
+const Op = mysqlDB.Sequelize.Op;
+const bcrypt = require("bcryptjs");
 
 const create = async (req, res) => {
   // Data validation
@@ -12,14 +14,15 @@ const create = async (req, res) => {
 
   try {
     // Create new user
-    const user = new MongoUser({
-      fullName: req.body.name,
-      city: req.body.city,
+    const user = {
+      username: req.body.username,
+      password: bcrypt.hashSync(req.body.password, 10),
+      name: req.body.name,
       age: req.body.age ? req.body.age : null,
-    });
+    };
 
     // Save new user in database
-    await user.save();
+    await User.create(user);
 
     res.status(201).send({
       success: true,
@@ -42,7 +45,7 @@ const findAll = async (req, res) => {
 
   try {
     // Received user list
-    let usersList = await MongoUser.find(condition);
+    let usersList = await User.findAll({ where: condition });
     // Send data
     res.status(202).send({
       success: true,
@@ -62,7 +65,7 @@ const findOne = async (req, res) => {
 
   try {
     // Received user data
-    let user = await MongoUser.findById(id);
+    let user = await User.findByPk(id);
     // Send data
     res.status(202).send({
       success: true,
@@ -81,9 +84,17 @@ const update = async (req, res) => {
   const id = req.params.id;
   try {
     // Received user data
-    let user = await MongoUser.findByIdAndUpdate(id, req.body, {
-      useFindAndModify: false,
-    });
+    let user = await User.update(
+      {
+        username: req.body.username,
+        password: bcrypt.hashSync(req.body.password, 10),
+        name: req.body.name,
+        age: req.body.age ? req.body.age : null,
+      },
+      {
+        where: { id: id },
+      }
+    );
     // Send data
     res.status(200).send({
       success: true,
@@ -103,7 +114,9 @@ const deleteUser = async (req, res) => {
 
   try {
     // Delete user with this ID
-    await MongoUser.findByIdAndRemove(id);
+    await User.destroy({
+      where: { id: id },
+    });
 
     // Send data
     res.status(200).send({
@@ -121,11 +134,15 @@ const deleteUser = async (req, res) => {
 const deleteAll = async (req, res) => {
   try {
     // Delete all user
-    await MongoUser.deleteMany({});
+    let num = await User.destroy({
+      where: {},
+      truncate: false,
+    });
 
     // Send data
     res.status(200).send({
       success: true,
+      num,
       message: `${data.deletedCount} User were deleted successfully!`,
     });
   } catch (error) {
