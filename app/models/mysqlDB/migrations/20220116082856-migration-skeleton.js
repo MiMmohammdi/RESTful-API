@@ -1,7 +1,6 @@
-module.exports = (sequelize, Sequelize) => {
-  const User = sequelize.define(
-    "user",
-    {
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    return queryInterface.createTable("users", {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -22,13 +21,12 @@ module.exports = (sequelize, Sequelize) => {
       age: {
         type: Sequelize.INTEGER,
       },
-    },
-    {
-      timestamps: true,
-      createdAt: true,
-      updatedAt: true,
-    }
-  );
+      createdAt: Sequelize.DATE,
+      updatedAt: Sequelize.DATE,
+    });
+  },
 
-  return User;
+  down: async (queryInterface, Sequelize) => {
+    return queryInterface.dropTable("users");
+  },
 };

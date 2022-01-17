@@ -1,11 +1,11 @@
-const mysqlController = require("./mysqlControllers");
-const mongodbController = require("./mongodbControllers");
-const mongodbTokenController = require("./mongodbControllers/tokenController");
-const mysqlTokenController = require("./mysqlControllers/tokenController");
+const mongodbRegisterController = require("./mongodbControllers/register");
+const mysqlRegisterController = require("./mysqlControllers/register");
+const mongodbUsersController = require("./mongodbControllers/users");
+const mysqlUsersController = require("./mysqlControllers/users");
 
 module.exports = {
-  mysqlController,
-  mongodbController,
-  mongodbTokenController,
-  mysqlTokenController,
+  mysqlUsersController,
+  mongodbUsersController,
+  mongodbRegisterController,
+  mysqlRegisterController,
 };

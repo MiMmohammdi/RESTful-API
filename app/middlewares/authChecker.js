@@ -1,5 +1,6 @@
 const { jwtService } = require("../services");
 module.exports = (req, res, next) => {
+  // Header Not exist
   if (!("authorization" in req.headers)) {
     return res.status(401).send({
       status: "Error",
@@ -8,6 +9,7 @@ module.exports = (req, res, next) => {
     });
   }
 
+  // Verify jwt token
   const token = jwtService.verify(req.headers.authorization);
 
   if (!token) {

@@ -39,10 +39,16 @@ mongoDB.mongoose
 app.use("/api-doc", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Main Route and Setup another routers for mySQL database
-app.use("/api/v1/users/sql", router.mysqlRouter);
+// User router
+app.use("/api/v1/sql/users", router.mysqlUsersRouter);
+// Register router
+app.use("/api/v1/sql/register", router.mysqlRegisterRouter);
 
 // Main Route and Setup another routers for MongoDB database
-app.use("/api/v1/users/nosql", router.mongodbRouter);
+// Users router
+app.use("/api/v1/nosql/users", router.mongodbUsersRouter);
+// Register router
+app.use("/api/v1/nosql/register", router.mongodbRegisterRouter);
 
 // Root address
 app.get("/", (req, res) => {

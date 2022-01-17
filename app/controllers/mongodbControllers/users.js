@@ -1,5 +1,7 @@
-const mongo = require("../../models").mongoDB;
-const MongoUser = mongo.users;
+const { mongoDB } = require("../../models");
+const MongoUser = mongoDB.users;
+
+const bcrypt = require("bcryptjs");
 
 const create = async (req, res) => {
   // Data validation
@@ -13,8 +15,9 @@ const create = async (req, res) => {
   try {
     // Create new user
     const user = new MongoUser({
-      fullName: req.body.name,
-      city: req.body.city,
+      username: req.body.username,
+      password: bcrypt.hashSync(req.body.password),
+      name: req.body.name,
       age: req.body.age ? req.body.age : null,
     });
 
@@ -81,9 +84,18 @@ const update = async (req, res) => {
   const id = req.params.id;
   try {
     // Received user data
-    let user = await MongoUser.findByIdAndUpdate(id, req.body, {
-      useFindAndModify: false,
-    });
+    let user = await MongoUser.findByIdAndUpdate(
+      id,
+      {
+        username: req.body.username,
+        password: bcrypt.hashSync(req.body.password),
+        name: req.body.name,
+        age: req.body.age ? req.body.age : null,
+      },
+      {
+        useFindAndModify: false,
+      }
+    );
     // Send data
     res.status(200).send({
       success: true,

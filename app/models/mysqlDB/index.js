@@ -7,11 +7,11 @@ const user = require("./users");
 
 // Config sequlize for connection
 const sequelize = new Sequelize(
-  dbConfig.DATABASE,
-  dbConfig.USER,
-  dbConfig.PASSWORD,
+  dbConfig.database,
+  dbConfig.username,
+  dbConfig.password,
   {
-    host: dbConfig.HOST,
+    host: dbConfig.host,
     dialect: dbConfig.dialect,
     operatorsAliases: false,
 
