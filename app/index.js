@@ -54,7 +54,10 @@ app.use("/api/v1/nosql/register", router.mongodbRegisterRouter);
 app.get("/", (req, res) => {
   let message =
     "This is my first Restfull API. To use the documentation, go to this address.";
-  res.json({ message: message, address: "http://localhost:8080/api-doc" });
+  res.json({
+    message: message,
+    address: `http://${process.env.APP_HOST}:${process.env.APP_PORT}/api-doc`,
+  });
 });
 
 // Error handler and non route page handler

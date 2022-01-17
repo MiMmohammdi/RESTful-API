@@ -8,8 +8,8 @@ const cacheHandler = require("../../middlewares/cacheHandler");
 // Express Router
 const router = require("express").Router();
 
-// router.use(authChecker);
-// router.use(authChecker);
+// Check jwt token
+router.use(authChecker);
 
 // Create new user
 router.post("/create", mysqlUsersController.create);
