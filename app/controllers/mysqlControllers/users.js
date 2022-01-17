@@ -1,7 +1,8 @@
+const { cachingService } = require("../../services");
 const { mysqlDB } = require("../../models");
-const User = mysqlDB.users;
-const Op = mysqlDB.Sequelize.Op;
 const bcrypt = require("bcryptjs");
+const Op = mysqlDB.Sequelize.Op;
+const User = mysqlDB.users;
 
 const create = async (req, res) => {
   // Data validation
@@ -62,16 +63,24 @@ const findAll = async (req, res) => {
 
 const findOne = async (req, res) => {
   const id = req.params.id;
-
   try {
     // Received user data
-    let user = await User.findByPk(id);
-    // Send data
-    res.status(202).send({
-      success: true,
-      message: `find User with id=${id}.`,
-      user,
-    });
+    const user = await User.findByPk(id);
+    if (user) {
+      let result = await cachingService.set(id, user.dataValues);
+
+      // Send data
+      res.status(202).send({
+        success: true,
+        message: `find User with id=${id}.`,
+        user: user.dataValues,
+      });
+    } else {
+      res.status(408).send({
+        success: false,
+        message: `Cannot find User with id=${id}.`,
+      });
+    }
   } catch (error) {
     res.status(408).send({
       success: false,

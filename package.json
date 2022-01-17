@@ -20,6 +20,7 @@
     "mongoose": "^6.1.5",
     "mysql2": "^1.5.3",
     "nodemon": "^2.0.15",
+    "redis": "^4.0.2",
     "sequelize": "^6.12.5",
     "swagger-jsdoc": "5.0.1",
     "swagger-ui-express": "^4.3.0"

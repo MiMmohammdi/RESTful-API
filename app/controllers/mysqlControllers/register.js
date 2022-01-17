@@ -20,8 +20,6 @@ const signUp = async (req, res) => {
   });
   try {
     if (users == null) {
-      console.log("111111111111111111111 :>> ");
-
       // Create new user
       const user = {
         username: req.body.username,

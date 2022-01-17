@@ -3,11 +3,13 @@ const { mysqlUsersController } = require("../../controllers");
 
 // Auth middleware
 const authChecker = require("../../middlewares/authChecker");
+const cacheHandler = require("../../middlewares/cacheHandler");
 
 // Express Router
 const router = require("express").Router();
 
-router.use(authChecker);
+// router.use(authChecker);
+// router.use(authChecker);
 
 // Create new user
 router.post("/create", mysqlUsersController.create);
@@ -16,7 +18,7 @@ router.post("/create", mysqlUsersController.create);
 router.get("/find_all", mysqlUsersController.findAll);
 
 // Find one user by ID
-router.get("/find/:id", mysqlUsersController.findOne);
+router.get("/find/:id",cacheHandler, mysqlUsersController.findOne);
 
 // Update user information
 router.put("/update/:id", mysqlUsersController.update);
