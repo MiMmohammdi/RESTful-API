@@ -8,14 +8,14 @@ module.exports = {
   NODE_ENV: process.env.NODE_ENV || "development",
   // MySQL Configuration
 
-  host: process.env.DB_HOST,
-  username: process.env.DB_USERNAME,
+  host: process.env.DB_HOST || "localhost",
+  username: process.env.DB_USERNAME || "root",
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE_NAME,
-  port: process.env.DB_PORT,
+  database: process.env.DB_DATABASE_NAME || "CRUD1",
+  port: process.env.DB_PORT || "3306",
 
   // Database type
-  dialect: process.env.DB_TYPE,
+  dialect: process.env.DB_TYPE || "mysql",
 
   // Pooling configuration for better connection
   pool: {

@@ -47,22 +47,20 @@ This is my first RESTful APIs project for **CRUD** operations by **Node.js** and
 
  5. Create new **.env** file or rename **.env.example** to **development.env**
  6. Insert information to **development.env**, such as **.env.example** and set database **username** and **password**
- 7. Run migrations file by the following code
+ 7. Run application in development environment
+	> `nodemon`
+
+ 9. Run migrations file by the following code
 
 	> `npx sequelize-cli db:migrate`
 
    
- 8. Run Seeders file and insert sample data for mySQL by the following code
-   
-
-    
-
+ 10. Run Seeders file and insert sample data for mySQL by the following code
+  
 	> `npx sequelize-cli db:seed:all`
 
     
- 9. Run application in development environment
 
-	 > `nodemon`
 
     
 
