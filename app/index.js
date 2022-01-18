@@ -2,6 +2,7 @@
 const swaggerDocument = require("../swagger.json");
 const swaggerUi = require("swagger-ui-express");
 
+
 // Models
 const { mysqlDB, mongoDB } = require("./models");
 
@@ -17,7 +18,7 @@ const router = require("./router/index");
 
 try {
   // mySQL Connection
-  mysqlDB.sequelize.sync({ force: true }).then(() => {
+  mysqlDB.sequelize.sync({ force: true, alter: true }).then(() => {
     console.log("Drop and re-sync mySQL Database.");
   });
 } catch (error) {
@@ -26,7 +27,7 @@ try {
 
 // MongoDB Connection
 mongoDB.mongoose
-  .connect(mongoDB.url)
+  .connect(mongoDB.url, { useUnifiedTopology: true, useNewUrlParser: true })
   .then(() => {
     console.log("Connected to the MongoDB database");
   })

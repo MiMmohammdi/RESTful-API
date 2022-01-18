@@ -24,18 +24,35 @@ This is my first RESTful APIs project for **CRUD** operations by **Node.js** and
 	> `npm install`
 
    
- 2. Create new database in mySQL called **CRUD**
- 3. Create new database in MongoDB called **CRUD**
- 4. Install **Redis Server** and Run server
+ 2. Run **mySQL** and **MongoDB**
+ 3. Install **Redis Server** 
+
+	> ````wget https://download.redis.io/releases/redis-6.2.6.tar.gz````
+	
+
+	> `tar xzf redis-6.2.6.tar.gz`
+	
+
+	> `cd redis-6.2.6`
+	
+
+	> `make`
+
+ 4. Run **Redis** server and **Redis-CLI**
+
+	> ````src/redis-server````
+	
+
+	> ````src/redis-cli````
+
  5. Create new **.env** file or rename **.env.example** to **development.env**
- 6. Insert information to **development.env**, such as **.env.example** and set your database **username** and **password**
- 7. Run databases and Redis server
- 8. Run migrations file by the following code
+ 6. Insert information to **development.env**, such as **.env.example** and set database **username** and **password**
+ 7. Run migrations file by the following code
 
 	> `npx sequelize-cli db:migrate`
 
    
- 9. Run Seeders file and insert sample data for mySQL by the following code
+ 8. Run Seeders file and insert sample data for mySQL by the following code
    
 
     
@@ -43,7 +60,7 @@ This is my first RESTful APIs project for **CRUD** operations by **Node.js** and
 	> `npx sequelize-cli db:seed:all`
 
     
- 10. Run application in development environment
+ 9. Run application in development environment
 
 	 > `nodemon`
 
