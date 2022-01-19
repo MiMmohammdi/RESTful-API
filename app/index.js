@@ -18,7 +18,7 @@ const router = require("./router/index");
 
 try {
   // mySQL Connection
-  mysqlDB.sequelize.sync({ force: true, alter: true }).then(() => {
+  mysqlDB.sequelize.sync({ force: true}).then(() => {
     console.log("Drop and re-sync mySQL Database.");
   });
 } catch (error) {
