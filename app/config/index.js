@@ -3,11 +3,9 @@ require("dotenv").config({
   path: path.resolve(__dirname, `../../${process.env.NODE_ENV}.env`),
 });
 
-
 module.exports = {
   NODE_ENV: process.env.NODE_ENV || "development",
-  // MySQL Configuration
-
+  
   host: process.env.DB_HOST,
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
@@ -29,6 +27,6 @@ module.exports = {
   URL: process.env.DB_APP_URL,
 
   // Redis config
-  redisPort: process.env.REDIS_PORT || 6379,
-  redisHost: process.env.REDIS_HOST || "127.0.0.1",
+  redisPort: process.env.REDIS_PORT,
+  redisHost: process.env.REDIS_HOST,
 };

@@ -5,8 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "prod": "set NODE_ENV=production&& node server.js",
+    "prod-migration": "set NODE_ENV=production&& npx sequelize-cli db:migrate",
+    "prod-seed": "set NODE_ENV=production&& npx sequelize-cli db:seed:all",
     "dev": "set NODE_ENV=development&& node server.js",
-    "prod": "set NODE_ENV=production&& node server.js"
+    "dev-migration": "set NODE_ENV=development&& npx sequelize-cli db:migrate",
+    "dev-seed": "set NODE_ENV=development&& npx sequelize-cli db:seed:all"
   },
   "author": "",
   "license": "ISC",
