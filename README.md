@@ -81,9 +81,9 @@ This is my first RESTful APIs project for **CRUD** operations by **Node.js** and
 
   
 
-6. Duplicate **.env.example** and rename to **development.env**
+6. Rename **.env.example** to **.env**
 
-7. Set database **username** and **password** in **development.env** file
+7. Set database **username** and **password** in **.env** file
 
 8. Run **migrations** file by the following code
 
@@ -93,7 +93,7 @@ This is my first RESTful APIs project for **CRUD** operations by **Node.js** and
 
   
 
-9. Run **Seeders** file if you need insert sample data for mySQL or you have seed file
+9. Run **Seeders** file if you need insert sample data for mySQL and you have seed file. 
 
 > `npm run dev-seed`
 
@@ -101,7 +101,7 @@ This is my first RESTful APIs project for **CRUD** operations by **Node.js** and
 
 10. Run application in development environment
 
-> `nodemon`
+> `npm run dev`
 
   
 
@@ -162,9 +162,9 @@ This is my first RESTful APIs project for **CRUD** operations by **Node.js** and
 
   
 
-6. Duplicate **.env.example** and rename to **production.env**
+6. Rename **.env.example** to **.env**
 
-7. Set database **username** and **password** in **production.env** file and edit NODE_ENV to **production**
+7. Set database **username** and **password** in **.env** file and edit NODE_ENV to **production**
 
 8. Run **migrations** file by the following code
 
@@ -174,7 +174,7 @@ This is my first RESTful APIs project for **CRUD** operations by **Node.js** and
 
   
 
-9. Run **Seeders** file if you need insert sample data for mySQL or you have seed file
+9. Run **Seeders** file if you need insert sample data for mySQL and you have seed file
 
 > `npm run prod-seed`
 
