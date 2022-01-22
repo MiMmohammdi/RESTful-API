@@ -7,11 +7,8 @@ const Sequelize = require("sequelize");
 // User model
 const user = require("./users");
 
-const db = {};
 
-initDataBase();
-
-async function initDataBase() {
+async () => {
   try {
     // Create db if it doesn't already exist
     const connection = await mysql.createConnection({
@@ -23,42 +20,38 @@ async function initDataBase() {
     await connection.query(
       `CREATE DATABASE IF NOT EXISTS \`${dbConfig.database}\`;`
     );
-
-   
-    // Config sequlize for connection
-    const sequelize = await new Sequelize(
-      dbConfig.database,
-      dbConfig.username,
-      dbConfig.password,
-      {
-        dialect: dbConfig.dialect,
-
-        pool: {
-          max: dbConfig.pool.max,
-          min: dbConfig.pool.min,
-          acquire: dbConfig.pool.acquire,
-          idle: dbConfig.pool.idle,
-        },
-      }
-    );
-    await sequelize.sync({ alter: true });
-
-    // Connection stability test
-    sequelize
-      .authenticate()
-      .then(() => {
-        console.log("Connection has been established successfully.");
-      })
-      .catch((err) => {
-        console.error("Unable to connect to the database:", err);
-      });
-
-    db.user = user(sequelize, Sequelize);
-    db.sequelize = sequelize;
+ 
   } catch (error) {
     console.log("error :>> ", error);
   }
-}
+};
+
+// Config sequlize for connection
+const sequelize = new Sequelize(
+  dbConfig.database,
+  dbConfig.username,
+  dbConfig.password,
+  {
+    dialect: dbConfig.dialect,
+
+    pool: {
+      max: dbConfig.pool.max,
+      min: dbConfig.pool.min,
+      acquire: dbConfig.pool.acquire,
+      idle: dbConfig.pool.idle,
+    },
+  }
+);
+
+// Connection stability test
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log("Connection has been established successfully.");
+  })
+  .catch((err) => {
+    console.error("Unable to connect to the database:", err);
+  });
 
 // Package the necessary tools to communicate with the database and export
-module.exports = { Sequelize, sequelize: db.sequelize, users: db.user };
+module.exports = { Sequelize, sequelize, users: user(sequelize, Sequelize)}
