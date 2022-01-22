@@ -1,10 +1,10 @@
 const path = require("path");
 require("dotenv").config({
-  path: path.resolve(__dirname, `../../${process.env.NODE_ENV}.env`),
+  path: path.resolve(__dirname, `../../.env`),
 });
 
 module.exports = {
-  NODE_ENV: process.env.NODE_ENV || "development",
+  NODE_ENV: process.env.NODE_ENV,
   
   host: process.env.DB_HOST,
   username: process.env.DB_USERNAME,
