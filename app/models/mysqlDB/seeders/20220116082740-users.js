@@ -1,8 +1,21 @@
-const seedData = require("./seedData.json");
+const bcrypt = require('bcryptjs');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert("users", seedData, {});
+    const data = []
+
+    for (let index = 0; index < 3000; index++) {
+      data.push({
+        username: `username ${index}`,
+        password: bcrypt.hashSync(`${index}`),
+        name: `user ${index}`,
+        age: `${index}`,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      })
+    }
+    return queryInterface.bulkInsert("users", data, {});
+
   },
 
   down: async (queryInterface, Sequelize) => {
