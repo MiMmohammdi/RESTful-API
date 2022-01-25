@@ -411,6 +411,17 @@
       }
     }
   },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "description": "Enter JWT token",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "security": {"Bearer": []}
+  },
   "schemes": ["http"],
   "consumes": ["application/json"],
   "produces": ["application/json"]

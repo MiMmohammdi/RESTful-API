@@ -33,6 +33,7 @@ const signUp = async (req, res) => {
 
       let userData = { username: user.username, password: user.password };
       const token = generateAccessTokn(userData);
+      verify(token);
       return res.status(200).send({
         status: "New user created.",
         statusCode: 200,
@@ -41,6 +42,7 @@ const signUp = async (req, res) => {
     } else {
       let userData = { username: user.username, password: user.password };
       const token = generateAccessTokn(userData);
+      verify(token);
       return res.status(200).send({
         status: "New user created.",
         statusCode: 200,

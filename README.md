@@ -5,7 +5,11 @@
 
 This is my first RESTful APIs project for **CRUD** operations by **Node.js** and **Express** framework.
 
+  
+
 **Mysql** and **Mongodb** are used in the Database, which are connected to the project by **ORM** (**Sequlizer**) and **ODM** (**Mongoose**).
+
+  
 
 **Swagger** was used for documentation and endpoint testing.
 
@@ -13,177 +17,142 @@ This is my first RESTful APIs project for **CRUD** operations by **Node.js** and
 
 -  **Nodejs**
 
+  
+
 -  **Express**
+
+  
 
 -  **MySQL**
 
+  
+
 -  **MongoDB**
+
+  
 
 -  **Redis**
 
+  
+
 -  **JWT**
+
+  
 
 -  **Sequlize**
 
+  
+
 -  **Mongooes**
+
+  
 
 -  **Bcrypt**
 
+  
+
 -  **Swagger**
 
-  
   
 
 ## Project setup
 
   
 
-1. Install **dependencies**
+1. Clone project and get to project directory
 
   
 
-> `npm install`
+	> `git clone 	git@git.nadindev.ir:hamedgolshenas/mohammadi_test_express.git`
+
+	> `cd mohammadi_test_express`
 
   
 
-2. Run **mySQL** and **MongoDB**
-
-3. Install **Redis Server** for **Linux**
+2. Install **dependencies**
 
   
 
-> ````wget https://download.redis.io/releases/redis-6.2.6.tar.gz````
+	> `npm install`
 
   
 
-> `tar xzf redis-6.2.6.tar.gz`
+3. Run **mySQL** and **MongoDB**
 
   
 
-> `cd redis-6.2.6`
+4. Install **Redis Server** for **Linux**
 
   
 
-> `make`
+	> `wget https://download.redis.io/releases/redis-6.2.6.tar.gz`
 
   
 
- 4. If you are **Windows** user get this [address](https://github.com/microsoftarchive/redis/releases) and install Redis for windows
- 5. Run **Redis** server and **Redis-CLI**
+	> `tar xzf redis-6.2.6.tar.gz`
 
   
 
-> ````src/redis-server````
+	> `cd redis-6.2.6`
 
   
 
-> ````src/redis-cli````
+	> `make`
 
   
 
-6. Duplicate **.env.example** and rename to **development.env**
+5. If you are **Windows** user get this [address](https://github.com/microsoftarchive/redis/releases) and install Redis for windows
 
-7. Set database **username** and **password** in **development.env** file
-
-8. Run **migrations** file by the following code
+6. Run **Redis** server and **Redis-CLI**
 
   
 
-> `npm run dev-migration`
+	> `src/redis-server`
 
   
 
-9. Run **Seeders** file if you need insert sample data for mySQL or you have seed file
-
-> `npm run dev-seed`
+	> `src/redis-cli`
 
   
 
-10. Run application in development environment
-
-> `nodemon`
+7. Duplicate **.env.example** and rename to **.env** by this code:
 
   
 
-  
-
-  
-  
+	> `cp .env.example .env`
 
   
 
-# Run Production Environment
+8. Set database **username** and **password** in **.env** file
 
   
 
-> `npm run prod`
-
-  
-1. Install **dependencies**
+9. Run **migrations** file by the following code
 
   
 
-> `npm install`
+	> `npm run makemigrations`
 
   
 
-2. Run **mySQL** and **MongoDB**
-
-3. Install **Redis Server** for **Linux**
+10. Run **Seeders** file if you need insert sample data for mySQL or you have seed file
 
   
 
-> ````wget https://download.redis.io/releases/redis-6.2.6.tar.gz````
+	> `npm run seeders`
 
   
 
-> `tar xzf redis-6.2.6.tar.gz`
+11. Run application in development environment
 
   
 
-> `cd redis-6.2.6`
+	> `npm run dev`
 
   
-
-> `make`
-
-  
-
- 4. If you are **Windows** user get this [address](https://github.com/microsoftarchive/redis/releases) and install Redis for windows
- 5. Run **Redis** server and **Redis-CLI**
-
-  
-
-> ````src/redis-server````
-
-  
-
-> ````src/redis-cli````
-
-  
-
-6. Duplicate **.env.example** and rename to **production.env**
-
-7. Set database **username** and **password** in **production.env** file and edit NODE_ENV to **production**
-
-8. Run **migrations** file by the following code
-
-  
-
-> `npm run prod-migration`
-
-  
-
-9. Run **Seeders** file if you need insert sample data for mySQL or you have seed file
-
-> `npm run prod-seed`
-
-  
-
-10. Run application in **production** environment
-
-> `npm run prod`
-
-
 # Run Swagger
-You can access to swagger by the following [Address](http://localhost/api-doc)
+
+  
+
+You can access to swagger by the following [Address](http://localhost/docs)
+

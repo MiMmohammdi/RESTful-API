@@ -6,9 +6,9 @@ const User = mysqlDB.users;
 
 const create = async (req, res) => {
   // Data validation
-  if (!req.body.name || !req.body.city) {
+  if (!req.body.username || !req.body.password) {
     res.status(422).send({
-      message: "Name or City can not be empty!",
+      message: "Username or Password can not be empty!",
     });
     return;
   }
