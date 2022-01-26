@@ -63,22 +63,20 @@ This is my first RESTful APIs project for **CRUD** operations by **Node.js** and
 
   
 
-	> `git clone 	git@git.nadindev.ir:hamedgolshenas/mohammadi_test_express.git`
 
-	> `cd mohammadi_test_express`
+	> `git clone 	https://github.com/MiMmohammdi/RESTful-API.git`
+
+	> `cd RESTful-API`
 
   
 
 2. Install **dependencies**
 
   
-
 	> `npm install`
-
-  
+ 
 
 3. Run **mySQL** and **MongoDB**
-
   
 
 4. Install **Redis Server** for **Linux**
@@ -137,7 +135,7 @@ This is my first RESTful APIs project for **CRUD** operations by **Node.js** and
 
 10. Run **Seeders** file if you need insert sample data for mySQL or you have seed file
 
-  
+ 
 
 	> `npm run seeders`
 
@@ -146,8 +144,8 @@ This is my first RESTful APIs project for **CRUD** operations by **Node.js** and
 11. Run application in development environment
 
   
-
 	> `npm run dev`
+
 
   
 # Run Swagger
