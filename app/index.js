@@ -37,7 +37,7 @@ mongoDB.mongoose
   });
 
 // Start use Swagger for Documention
-app.use("/api-doc", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Main Route and Setup another routers for mySQL database
 // User router
@@ -57,7 +57,7 @@ app.get("/", (req, res) => {
     "This is my first Restfull API. To use the documentation, go to this address.";
   res.json({
     message: message,
-    address: `http://${process.env.APP_HOST}:${process.env.APP_PORT}/api-doc`,
+    address: `http://${process.env.APP_HOST}:${process.env.APP_PORT}/docs`,
   });
 });
 
